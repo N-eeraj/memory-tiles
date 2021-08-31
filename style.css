@@ -26,6 +26,10 @@ a{
     border-radius: 25px 0 0 25px;
 }
 
+button{
+    cursor: pointer;
+}
+
 .title{
     color: rgb(155, 0, 55);
     font-family: Satisfy;
@@ -49,7 +53,20 @@ a{
     background-position: center;
     background-repeat: no-repeat;
     border: 1px solid rgb(200, 150, 255);
-    cursor: pointer;
+}
+
+#score{
+    font-size: 1.5rem;
+}
+
+#reset{
+    width: 25vw;
+    margin-top: 3vh;
+    padding: 2% 0;
+    background-color: rgb(155, 0, 55);
+    color: rgb(200, 150, 255);
+    font-size: 1rem;
+    border-radius: 20px;
 }
 
 @media screen and (orientation: landscape)
@@ -63,5 +80,10 @@ a{
     .game-area{
         width: 80vh;
         height: 80vh;
+    }
+
+    #reset{
+        width: 10vw;
+        padding: 1% 0;
     }
 }

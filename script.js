@@ -8,7 +8,8 @@ $(document).ready(function () {
     // selecting a card/tile
     $(".tile").on("click",function() {selectCard($(this))});
 
-    $("body").append("This project is not complete");
+    $("#reset").on("click", () => window.location="index.html");
+
 
 });
 
@@ -16,7 +17,7 @@ let cardImg = "url('https://files.123freevectors.com/wp-content/original/19118-a
 
 // selected card
 const getTile = () => {
-    random = Math.floor(Math.random()*16);
+    random = Math.floor(Math.random() * imageList.length);
     let img = imageList[random];
     if(img !== undefined)
         return img;
@@ -57,17 +58,29 @@ function selectCard(element)
         else
         setTimeout(() => {
             console.log("Not Match");
+            score -= 5;
             element.css("background-image", cardImg).css("background-size", "contain").on("click",function() {selectCard($(this))});
             firstSelection.css("background-image", cardImg).css("background-size", "contain").on("click",function() {selectCard($(this))});
         }, 1000);
         selection = [];
     }
 
-    imageList = imageList.filter((i) => i!=undefined).sort();
+    if(imageList.length == 0)
+    {
 
-    // console.log("Selected: " + selectNum);
-    // console.log("Balance: " + imageList);
-    console.log(selectNum, imageList);
+        $("#score").append("<h1>Score: "+ score + "</h1>");
+
+        console.log("Game Over")
+        console.log("Score: " + score);
+    }
+    else
+    {
+        imageList = imageList.filter((i) => i!=undefined).sort();
+    
+        console.log("Selected: " + selectNum);
+        console.log("Balance: " + imageList);
+    }
+
 }
 
 // creating image array
@@ -80,3 +93,5 @@ for(i=0; i<8; i++){
 let selection = [];
 let firstSelection;
 let firstNum;
+
+let score = 100;

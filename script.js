@@ -1,65 +1,77 @@
 $(document).ready(function () {
     
     $("#header").html("<a href='https://N-eeraj.github.io/jQuery-learning'>Home</a>");
+
+    for(i=0; i<16; i++)
+        $(".game-area").append("<button data-id='8' class='tile'></button>");
     
     // selecting a card/tile
     $(".tile").on("click",function() {selectCard($(this))});
+
+    $("body").append("This project is not complete");
 
 });
 
 let cardImg = "url('https://files.123freevectors.com/wp-content/original/19118-abstract-dark-purple-square-background-template.jpg')";
 
-// delete selected card
+// selected card
 const getTile = () => {
     random = Math.floor(Math.random()*16);
     let img = imageList[random];
     if(img !== undefined)
-    {
-        delete imageList[random];
         return img;
-    }
     return getTile();
 };
 
 // select card/tile
 function selectCard(element)
 {
-    console.log(element);
     element.off("click");
 
     let tileNum = getTile();
-    let tileImg = "url(images/" + tileNum + ".png)";
     
+    if(element.attr("data-id") == 8)
+    {
+        selectNum = tileNum;
+        element.attr("data-id", tileNum);
+    }
+    else
+        selectNum = element.attr("data-id");
+        
+    let tileImg = "url(images/" + selectNum + ".png)";
     element.css("background-image", tileImg).css("background-size", "70%");
-    selection.push(tileNum);
+    selection.push(selectNum);
 
-    setTimeout(() => {
-        if(selection.length == 1)
+    if(selection.length == 1)
+    {
         firstSelection = element;
+        firstNum = selectNum;
+    }
     else
     {
         if(selection[0] == selection[1])
         {
             console.log("Match");
+            imageList = imageList.filter((i) => i != selectNum);
         }
         else
-        {
+        setTimeout(() => {
             console.log("Not Match");
             element.css("background-image", cardImg).css("background-size", "contain").on("click",function() {selectCard($(this))});
             firstSelection.css("background-image", cardImg).css("background-size", "contain").on("click",function() {selectCard($(this))});
-        }
+        }, 1000);
         selection = [];
     }
-    }, 1000);
 
-    
+    imageList = imageList.filter((i) => i!=undefined).sort();
 
-    console.log("Selected: " + tileNum);
-    console.log("Balance: " + imageList);
+    // console.log("Selected: " + selectNum);
+    // console.log("Balance: " + imageList);
+    console.log(selectNum, imageList);
 }
 
 // creating image array
-const imageList = [];
+var imageList = [];
 for(i=0; i<8; i++){
     imageList.push(i);
     imageList.push(i);
@@ -67,3 +79,4 @@ for(i=0; i<8; i++){
 
 let selection = [];
 let firstSelection;
+let firstNum;

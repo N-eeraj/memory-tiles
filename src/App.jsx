@@ -1,3 +1,6 @@
+// react imports
+import { useEffect, useState } from 'react'
+
 // component imports
 import Tile from '@components/Tile'
 
@@ -29,13 +32,46 @@ const values = [
 ]
 
 const shuffledValues = shuffle([...values, ...values])
-
+console.log(shuffledValues)
 const App = () => {
+  const [selection, setSelection] = useState([])
+  const [reset, setReset] = useState(false)
+
+  const handleTileFlip = index => {
+    // if (selection.length === 2) return
+    setSelection(selection => ([...selection, index]))
+  }
+
+  useEffect(() => {
+    if (selection.length !== 2) return
+    if (shuffledValues[selection[0]] === shuffledValues[selection[1]]) {
+      setSelection([])
+    }
+    else {
+      setTimeout(() => {
+        setReset(true)
+        setTimeout(() => {
+          setReset(false)
+        }, 100)
+        setSelection([])
+      }, 1000)
+    }
+  }, [selection])
+
+  const getDisable = index => {
+    return selection.length === 2 || selection.includes(index)
+  }
+
   return (
     <main className={style.container}>
       {
         shuffledValues.map((image, index) => (
-          <Tile backValue={image} key={index} />
+          <Tile
+            reset={reset}
+            backValue={image}
+            disable={getDisable(index)}
+            key={index}
+            onClick={() => handleTileFlip(index)} />
         ))
       }
     </main>

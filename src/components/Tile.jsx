@@ -1,5 +1,5 @@
 // react imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // react flip imports
 import ReactFlipCard from 'reactjs-flip-card'
@@ -10,8 +10,20 @@ import backCover from '@assets/cover.jpg'
 // style imports
 import style from '@styles/tile.module.scss'
     
-const Tile = ({ backValue }) => {
+const Tile = ({ backValue, reset, disable, onClick }) => {
   const [value, setValue] = useState(false)
+
+  const handleClick = () => {
+    if (disable) return
+    onClick()
+    setValue(!value)
+  }
+
+  useEffect(() => {
+    if (reset) {
+      setValue(false)
+    }
+  }, [reset])
 
   return (
     <ReactFlipCard
@@ -23,7 +35,7 @@ const Tile = ({ backValue }) => {
       flipCardCss={style.tile}
       frontCss={style.front}
       backCss={style.back}
-      onClick={() => setValue(!value)} />
+      onClick={handleClick} />
   )
 }
 

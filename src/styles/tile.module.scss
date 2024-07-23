@@ -1,0 +1,19 @@
+.container {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+
+  .tile {
+    background-color: black;
+    border-radius: 10px;
+    
+    .front, .back {
+      border-radius: 10px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

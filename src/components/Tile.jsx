@@ -10,7 +10,7 @@ import backCover from '@assets/cover.jpg'
 // style imports
 import style from '@styles/tile.module.scss'
     
-const Tile = ({ backValue, reset, disable, onClick }) => {
+const Tile = ({ backValue, disable, reset, matched, onClick }) => {
   const [value, setValue] = useState(false)
 
   const handleClick = () => {
@@ -20,7 +20,7 @@ const Tile = ({ backValue, reset, disable, onClick }) => {
   }
 
   useEffect(() => {
-    if (reset) {
+    if (reset && !matched) {
       setValue(false)
     }
   }, [reset])

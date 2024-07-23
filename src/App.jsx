@@ -1,5 +1,5 @@
 // react imports
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 // component imports
 import Tile from '@components/Tile'
@@ -31,14 +31,15 @@ const values = [
   image8,
 ]
 
-const shuffledValues = shuffle([...values, ...values])
-console.log(shuffledValues)
 const App = () => {
   const [selection, setSelection] = useState([])
   const [reset, setReset] = useState(false)
+  const [matched, setMatched] = useState([])
+  const [gameOver, setGameOver] = useState(false)
+
+  const shuffledValues = useMemo(() => shuffle([...values, ...values]), [gameOver])
 
   const handleTileFlip = index => {
-    // if (selection.length === 2) return
     setSelection(selection => ([...selection, index]))
   }
 
@@ -46,6 +47,7 @@ const App = () => {
     if (selection.length !== 2) return
     if (shuffledValues[selection[0]] === shuffledValues[selection[1]]) {
       setSelection([])
+      setMatched(matched => [...matched, shuffledValues[selection[0]]])
     }
     else {
       setTimeout(() => {
@@ -58,18 +60,25 @@ const App = () => {
     }
   }, [selection])
 
-  const getDisable = index => {
-    return selection.length === 2 || selection.includes(index)
-  }
+  const getDisable = index => selection.length === 2 || selection.includes(index)
+
+  useEffect(() => {
+    if (matched.length === values.length) {
+      setGameOver(true)
+      setMatched([])
+      setReset(true)
+    }
+  }, [matched])
 
   return (
     <main className={style.container}>
       {
         shuffledValues.map((image, index) => (
           <Tile
-            reset={reset}
             backValue={image}
             disable={getDisable(index)}
+            reset={reset}
+            matched={matched.includes(image)}
             key={index}
             onClick={() => handleTileFlip(index)} />
         ))

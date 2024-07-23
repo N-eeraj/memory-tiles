@@ -1,18 +1,9 @@
 // react imports
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useContext } from 'react'
+import { Context } from '@components/ContextProvider'
 
 // component imports
 import Tile from '@components/Tile'
-
-// asset imports
-import image1 from '@assets/arryn.webp'
-import image2 from '@assets/baratheon.svg'
-import image3 from '@assets/greyjoy.webp'
-import image4 from '@assets/hightower.webp'
-import image5 from '@assets/tully.webp'
-import image6 from '@assets/targaryen.webp'
-import image7 from '@assets/lannister.webp'
-import image8 from '@assets/stark.webp'
 
 // util files imports
 import shuffle from '@/shuffle'
@@ -20,54 +11,51 @@ import shuffle from '@/shuffle'
 // style imports
 import style from '@styles/grid.module.scss'
 
-const values = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6,
-  image7,
-  image8,
-]
-
 const Grid = () => {
-  const [selection, setSelection] = useState([])
-  const [reset, setReset] = useState(false)
-  const [matched, setMatched] = useState([])
-  const [gameOver, setGameOver] = useState(false)
+  const {
+    selection,
+    reset,
+    matched,
+    gameOver,
+    tries,
+    images,
+    setSelection,
+    setReset,
+    setMatched,
+    setScore,
+  } = useContext(Context)
 
-  const shuffledValues = useMemo(() => shuffle([...values, ...values]), [gameOver])
-
-  const handleTileFlip = index => {
-    setSelection(selection => ([...selection, index]))
+  const shuffledValues = useMemo(() => shuffle([...images, ...images]), [gameOver])
+  const handleTileFlip = index => setSelection(selection => ([...selection, index]))
+  const getDisable = index => selection.length === 2 || selection.includes(index)
+  const toggleReset = () => {
+    setReset(true)
+    setTimeout(() => {
+      setReset(false)
+    }, 100)
   }
 
   useEffect(() => {
     if (selection.length !== 2) return
+    tries.current++
     if (shuffledValues[selection[0]] === shuffledValues[selection[1]]) {
       setSelection([])
       setMatched(matched => [...matched, shuffledValues[selection[0]]])
     }
     else {
       setTimeout(() => {
-        setReset(true)
-        setTimeout(() => {
-          setReset(false)
-        }, 100)
+        toggleReset()
         setSelection([])
       }, 1000)
     }
   }, [selection])
 
-  const getDisable = index => selection.length === 2 || selection.includes(index)
-
   useEffect(() => {
-    if (matched.length === values.length) {
+    if (matched.length === images.length) {
       setTimeout(() => {
-        setGameOver(true)
+        setScore(1000 - (tries.current - 8) * 17)
         setMatched([])
-        setReset(true)
+        toggleReset()
       }, 1000)
     }
   }, [matched])

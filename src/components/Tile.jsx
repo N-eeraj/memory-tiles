@@ -14,7 +14,7 @@ const Tile = ({ backValue, disable, reset, matched, onClick }) => {
   const [value, setValue] = useState(false)
 
   const handleClick = () => {
-    if (disable) return
+    if (disable || matched) return
     onClick()
     setValue(!value)
   }

@@ -1,6 +1,10 @@
 .container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
   display: grid;
-  grid-template-columns: repeat(4, 200px);
-  gap: 8px;
-  padding: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(4px, 1vw, 12px);
+  width: min(95%, 720px);
+  transform: translate(-50%, -50%);
 }

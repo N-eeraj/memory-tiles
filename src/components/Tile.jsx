@@ -34,7 +34,7 @@ const Tile = ({ backValue, disable, reset, matched, onClick }) => {
       containerCss={style.container}
       flipCardCss={style.tile}
       frontCss={style.front}
-      backCss={style.back}
+      backCss={`${style.back} ${matched && style.matched}`}
       onClick={handleClick} />
   )
 }

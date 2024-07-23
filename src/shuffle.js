@@ -1,5 +1,4 @@
 const shuffle = array => {
-  let currentIndex = array.length;
   let currentIndex = array.length
 
   // While there remain elements to shuffle...

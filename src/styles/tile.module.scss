@@ -11,6 +11,10 @@
       border-radius: 10px;
       overflow: hidden;
 
+      &.back {
+        padding: 25px;
+      }
+
       img {
         width: 100%;
       }

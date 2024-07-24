@@ -5,6 +5,7 @@ import { Context } from '@components/ContextProvider'
 // component imports
 import Grid from '@components/Grid'
 import ScoreCard from '@components/ScoreCard'
+import Settings from '@components/Settings'
 
 // style imports
 import style from '@styles/app.module.scss'
@@ -14,6 +15,7 @@ const App = () => {
 
   return (
     <main className={style.app}>
+      <Settings />
       <Grid />
       {score !== null && <ScoreCard />}
     </main>

@@ -2,6 +2,9 @@
 import { useContext } from 'react'
 import { Context } from '@components/ContextProvider'
 
+// component imports
+import Modal from '@components/Modal'
+
 // style imports
 import style from '@styles/score-card.module.scss'
 
@@ -21,8 +24,7 @@ const ScoreCard = () => {
 
   return (
     <>
-      <div className={style.overlay} />
-      <div className={style.modal}>
+      <Modal>
         <span className={style.title}>
           Your Score
         </span>
@@ -32,7 +34,7 @@ const ScoreCard = () => {
         <button className={style.button} onClick={handlePlayAgain}>
           Play Again
         </button>
-      </div>
+      </Modal>
     </>
   )
 }

@@ -1,0 +1,43 @@
+.switch {
+  position: relative;
+  width: 80px;
+  aspect-ratio: 2;
+  background-color: #FFF3;
+  border-radius: 30px;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+    aspect-ratio: 1;
+    background-color: white;
+    border-radius: 50%;
+    transition-duration: 200ms;
+
+  }
+
+  &:hover {
+    &::after {
+      opacity: 0.75;
+      transform: scale(0.95);
+    }
+  }
+  
+  &.selected {
+    background-color: #0AF;
+
+    &::after {
+      left: calc(100% - 5px);
+      transform: translateX(-100%);
+    }
+
+    &:hover {
+      &::after {
+        transform: translateX(-100%) scale(0.95);
+      }
+    }
+  }
+}

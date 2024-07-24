@@ -17,7 +17,7 @@ const App = () => {
     <main className={style.app}>
       <Settings />
       <Grid />
-      {score !== null && <ScoreCard />}
+      <ScoreCard show={score !== null} />
     </main>
   )
 }

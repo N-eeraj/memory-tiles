@@ -1,24 +1,32 @@
 $color: #EEE;
 
-.title {
-  color: rgba($color, 0.7);
-  font-size: 16pt;
-}
-.score {
-  color: $color;
-  font-size: 36pt;
-}
-.button {
-  padding: 10px 24px;
-  background-color: transparent;
-  color: $color;
-  font-weight: 600;
-  border: 1px solid $color;
-  border-radius: 4px;
-  transition-duration: 400ms;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba($color, 0.25);
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 12px;
+  
+  .title {
+    color: rgba($color, 0.7);
+    font-size: 16pt;
+  }
+  .score {
+    color: $color;
+    font-size: 36pt;
+  }
+  .button {
+    padding: 10px 24px;
+    background-color: transparent;
+    color: $color;
+    font-weight: 600;
+    border: 1px solid $color;
+    border-radius: 4px;
+    transition-duration: 400ms;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: rgba($color, 0.25);
+    }
   }
 }

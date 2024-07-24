@@ -8,7 +8,7 @@ import Modal from '@components/Modal'
 // style imports
 import style from '@styles/score-card.module.scss'
 
-const ScoreCard = () => {
+const ScoreCard = ({ show }) => {
   const {
     score,
     tries,
@@ -24,7 +24,7 @@ const ScoreCard = () => {
 
   return (
     <>
-      <Modal>
+      <Modal value={show} className={style.card}>
         <span className={style.title}>
           Your Score
         </span>

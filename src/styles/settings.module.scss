@@ -1,0 +1,28 @@
+.icon {
+  position: fixed;
+  font-size: 24px;
+  transition-duration: 200ms;
+  cursor: pointer;
+
+  &.settings {
+    top: min(5vh, 20px);
+    right: min(5vw, 20px);
+
+    &:hover {
+      transform: rotate(-5deg);
+    }
+  
+    &.open {
+      transform: rotate(45deg);
+    }
+  }
+
+  &.close {
+    top: 10px;
+    right: 10px;
+
+    &:hover {
+      transform: scale(90%);
+    }
+  }
+}

@@ -29,7 +29,7 @@ const ContextProvider = ({ children }) => {
   const [reset, setReset] = useState(false)
   const [matched, setMatched] = useState([])
   const [gameOver, setGameOver] = useState(false)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(null)
 
   const tries = useRef(0)
 

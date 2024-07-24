@@ -15,7 +15,7 @@ const App = () => {
   return (
     <main className={style.app}>
       <Grid />
-      {!!score && <ScoreCard />}
+      {score !== null && <ScoreCard />}
     </main>
   )
 }

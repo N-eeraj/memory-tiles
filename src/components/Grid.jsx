@@ -23,6 +23,7 @@ const Grid = () => {
     setReset,
     setMatched,
     setScore,
+    setGameOver,
   } = useContext(Context)
 
   const shuffledValues = useMemo(() => shuffle([...images, ...images]), [gameOver])
@@ -53,12 +54,18 @@ const Grid = () => {
   useEffect(() => {
     if (matched.length === images.length) {
       setTimeout(() => {
-        setScore(1000 - (tries.current - 8) * 17)
+        let score = 1000 - (tries.current - 8) * 17
+        if (score < 0) score = 0
+        setScore(score)
         setMatched([])
         toggleReset()
       }, 1000)
     }
   }, [matched])
+
+  useEffect(() => {
+    setGameOver(false)
+  }, [shuffledValues])
 
   return (
     <div className={style.container}>

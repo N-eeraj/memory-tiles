@@ -6,7 +6,18 @@ import { Context } from '@components/ContextProvider'
 import style from '@styles/score-card.module.scss'
 
 const ScoreCard = () => {
-  const { score } = useContext(Context)
+  const {
+    score,
+    tries,
+    setScore,
+    setGameOver,
+  } = useContext(Context)
+
+  const handlePlayAgain = () => {
+    tries.current = 0
+    setScore(null)
+    setGameOver(true)
+  }
 
   return (
     <>
@@ -18,7 +29,7 @@ const ScoreCard = () => {
         <strong className={style.score}>
           {score}
         </strong>
-        <button className={style.button}>
+        <button className={style.button} onClick={handlePlayAgain}>
           Play Again
         </button>
       </div>

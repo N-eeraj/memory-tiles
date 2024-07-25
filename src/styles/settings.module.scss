@@ -19,7 +19,12 @@
 }
 
 .modal {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 24px;
+  padding: 24px 36px;
 
   .close {
     position: absolute;
@@ -28,6 +33,24 @@
 
     &:hover {
       transform: scale(90%);
+    }
+  }
+
+  .title {
+    font-size: 20pt;
+    color: #FFFA;
+    letter-spacing: 1px;
+  }
+
+  .switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .label {
+      font-size: 16pt;
+      color: white;
     }
   }
 }

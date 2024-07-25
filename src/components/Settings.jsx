@@ -28,9 +28,29 @@ const Settings = () => {
           className={`${style.icon} ${style.close}`}
           onClick={() => setOpen(false)} />
 
-        <Switch
-          value={sound}
-          onChange={() => setSound(!sound)} />
+        <strong className={style.title}>
+          Settings
+        </strong>
+
+        <div className={style.switch}>
+          <span className={style.label}>
+            Sound
+          </span>
+
+          <Switch
+            value={sound}
+            onChange={() => setSound(!sound)} />
+        </div>
+
+        <div className={style.switch}>
+          <span className={style.label}>
+            Vibration
+          </span>
+
+          <Switch
+            value={vibration}
+            onChange={() => setVibration(!vibration)} />
+        </div>
       </Modal>
     </>
   )

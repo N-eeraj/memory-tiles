@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import ReactFlipCard from 'reactjs-flip-card'
 
 // asset imports
-import backCover from '@assets/cover.jpg'
+import backCover from '@assets/images/cover.jpg'
 
 // style imports
 import style from '@styles/tile.module.scss'

@@ -1,28 +1,9 @@
 // react import
 import { createContext, useRef, useState } from 'react'
 
-// asset imports
-import image1 from '@assets/arryn.webp'
-import image2 from '@assets/baratheon.svg'
-import image3 from '@assets/greyjoy.webp'
-import image4 from '@assets/hightower.webp'
-import image5 from '@assets/tully.webp'
-import image6 from '@assets/targaryen.webp'
-import image7 from '@assets/lannister.webp'
-import image8 from '@assets/stark.webp'
-
-const images = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6,
-  image7,
-  image8,
-]
-
 export const Context = createContext()
+
+const canVibrate = 'vibrate' in navigator
 
 const ContextProvider = ({ children }) => {
   const [selection, setSelection] = useState([])
@@ -30,6 +11,9 @@ const ContextProvider = ({ children }) => {
   const [matched, setMatched] = useState([])
   const [gameOver, setGameOver] = useState(false)
   const [score, setScore] = useState(null)
+  const [sound, setSound] = useState(true)
+  const [vibration, setVibration] = useState(canVibrate)
+  
 
   const tries = useRef(0)
 
@@ -38,14 +22,18 @@ const ContextProvider = ({ children }) => {
     reset,
     matched,
     gameOver,
-    images,
     score,
     tries,
+    sound,
+    vibration,
+    canVibrate,
     setSelection,
     setReset,
     setMatched,
     setGameOver,
     setScore,
+    setSound,
+    setVibration,
   }
 
   return (

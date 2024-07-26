@@ -1,5 +1,6 @@
 // react imports
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { Context } from '@components/ContextProvider'
 
 // component imports
 import Modal from '@components/Modal'
@@ -11,9 +12,14 @@ import CloseIcon from '@components/Icon/Close'
 import style from '@styles/settings.module.scss'
 
 const Settings = () => {
+  const {
+    sound,
+    setSound,
+    vibration,
+    setVibration,
+    canVibrate,
+  } = useContext(Context)
   const [open, setOpen] = useState(false)
-  const [sound, setSound] = useState(true)
-  const [vibration, setVibration] = useState(true)
 
   return (
     <>
@@ -42,15 +48,18 @@ const Settings = () => {
             onChange={() => setSound(!sound)} />
         </div>
 
-        <div className={style.switch}>
-          <span className={style.label}>
-            Vibration
-          </span>
+        {
+          canVibrate && 
+          <div className={style.switch}>
+            <span className={style.label}>
+              Vibration
+            </span>
 
-          <Switch
-            value={vibration}
-            onChange={() => setVibration(!vibration)} />
-        </div>
+            <Switch
+              value={vibration}
+              onChange={() => setVibration(!vibration)} />
+          </div>
+        }
       </Modal>
     </>
   )
